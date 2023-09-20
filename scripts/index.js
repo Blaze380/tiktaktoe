@@ -6,6 +6,7 @@ class Player{
        this.wins = 0;
        this.loses = 0;
        this.draws = 0;
+       this.gamesPlayed = 0;
    }
     getName() {
         return this.name;
@@ -16,16 +17,18 @@ class Player{
 }
 var player = [];
 for (let i = 0;i<2; i++){
-    player[i] = new Player("niuro");
+    player[i] = new Player("Joãozinh123");
 }
 var screen = document.getElementsByClassName("array_table");
-screen[0].addEventListener("click", function (event) {addDice(event.target.id);});
+screen[0].addEventListener("click", function (event) {
+    addDice(event.target.id);
+});
 var positions = [];
 var isOcuppied = [];
 var rows = 2; var columns = 2;
 var table = [];
 var quit = false;
-var currentPlayerDice = "";
+var currentPlayerDice = "X";
 /**
  * This Loop Creates a basic matrix  3x3 for gaming
  * "#Don't ask me why you have to suffer to declare  a matrix beacuse idk LOL."
@@ -49,20 +52,47 @@ function addDice(arrayData) {
     let column = arrayData.charAt(2);
     let won = false;
     if (!isOcuppied[row][column]) {
-        positions[row][column].innerText = "X";
+        positions[row][column].innerText = currentPlayerDice;
         isOcuppied[row][column] = true;
-        currentPlayerDice  ="X"
         won = verifyWinner();
+        console.log("entrei")
         if (won) {
             alert("I won!");
             createTable();
+        } else {
+            verifyDraw();
         }
+        changePlayer();
     } else {
         //#REMOVE THIS!!!!!!
         console.log("Error!");
     }
 }
+function verifyDraw() {
+    console.log("sd")
+    let cont = 0;
+    for (let i = 0; i < isOcuppied.length; i++){
+        for (let j = 0; j < isOcuppied[0].length; i++){
+            if (isOcuppied[i][j]) {
+                cont++;
+                console.log("vaaaaaaa")
+            }
+        }
+    }
+    if (cont === 9) {
+        alert("Deixa like aí viado kkkk");
+    }
+}
 
+function changePlayer() {
+    switch (currentPlayerDice) {
+        case "X":
+            currentPlayerDice = "O";
+            break;
+        case "O":
+            currentPlayerDice = "X";
+    }
+}
 function verifyWinner() {
     let counter = 0;
     let hasWinner = false;
