@@ -1,27 +1,34 @@
-// import Player from "./Player";
 class Player{
-   constructor(name){
-       this.name = name;
-       this.score = 0;
-       this.wins = 0;
-       this.loses = 0;
-       this.draws = 0;
-       this.gamesPlayed = 0;
-   }
-    getName() {
-        return this.name;
-    }
-    setName(name) {
+    constructor(name){
         this.name = name;
+        this.score = 0;
+        this.wins = 0;
+        this.loses = 0;
+        this.draws = 0;
+        this.gamesPlayed = 0;
     }
-}
-var player = [];
-for (let i = 0;i<2; i++){
-    player[i] = new Player("Joãozinh123");
-}
-var screen = document.getElementsByClassName("array_table");
-screen[0].addEventListener("click", function (event) {
-    addDice(event.target.id);
+     getName() {
+         return this.name;
+     }
+     setName(name) {
+         this.name = name;
+     }
+ }
+ var player = [];
+ for (let i = 0;i<2; i++){
+     player[i] = new Player("Joãozinh123");
+ }
+var container = document.getElementById("container");
+var screen;
+//var screen = document.getElementsByClassName("array_table");
+container.addEventListener("click", function (event) {
+    /**
+     * This condition was made to avoid to cause an exeption because of the table array 
+     * doesn't have an ID!
+     */
+    if(event.target.id !==""){
+        addDice(event.target.id);
+    }
 });
 var positions = [];
 var isOcuppied = [];
@@ -41,11 +48,20 @@ for (let i = 0; i <= rows; i++){
         isOcuppied[i][j] = false;
     }
 }
+function resetTable() {
+    for (let i = 0; i < positions.length; i++){
+    for (let j = 0; j < positions.length; j++){
+        table[i] = null;
+        positions[i][j] = null;
+        isOcuppied[i][j] = false;
+    }    
+}
+}
 createTable();
 /**
  * This method gets the position of the div receveing the ID(event.target.id) of the div.
  * And verifies if the current div is ocuppied with a dice. If isn't ocuppied, will add a dice.
- * @param {row/column} arrayData 
+ * @param {row/column} arrayData
  */
 function addDice(arrayData) {
     let row = arrayData.charAt(0);
@@ -55,7 +71,6 @@ function addDice(arrayData) {
         positions[row][column].innerText = currentPlayerDice;
         isOcuppied[row][column] = true;
         won = verifyWinner();
-        console.log("entrei")
         if (won) {
             alert("I won!");
             createTable();
@@ -69,18 +84,16 @@ function addDice(arrayData) {
     }
 }
 function verifyDraw() {
-    console.log("sd")
     let cont = 0;
     for (let i = 0; i < isOcuppied.length; i++){
-        for (let j = 0; j < isOcuppied[0].length; i++){
+        for (let j = 0; j < isOcuppied[0].length; j++){
             if (isOcuppied[i][j]) {
                 cont++;
-                console.log("vaaaaaaa")
             }
         }
     }
     if (cont === 9) {
-        alert("Deixa like aí viado kkkk");
+        alert("WithDraw");
     }
 }
 
@@ -102,13 +115,10 @@ function verifyWinner() {
         counter = secondPhase();
         hasWinner = hasWon(counter);
         if (!hasWinner) {
-          alert("sf")
             counter = thirdPhase();
             hasWinner = hasWon(counter);
         }
     }
-    console.log(hasWinner)
-    console.log(hasWinner +"sdfsf")
     return hasWinner;
 }
 
@@ -117,7 +127,6 @@ function secondPhase() {
     let column = 0;
     let cont = 0;
     while (!quit) {
-        console.log("2 fase")
         cont = 0;
         row++;
         for (let j = 0; j < positions[0].length; j++){
@@ -126,7 +135,7 @@ function secondPhase() {
             }
         }
         if (cont === positions.length ) {
-            break;
+            break; //Breaks the loop "while"
         } else {
             cont = 0;
             column++;
@@ -137,6 +146,8 @@ function secondPhase() {
             }
         }
         if (cont === positions.length ) {
+            break;
+        }else if (row<=positions.length-1 || column<=positions.length-1){
             break;
         }
     }
@@ -160,14 +171,14 @@ function hasWon(counter) {
 
 function thirdPhase() {
     let cont = 0;
-    console.log("3a fase")
-    for (let i = positions.length - 1; i >= 0;i--){
-        for (let j = 0; j <= positions[0].length - 1; j++){
-           /**REMOVE THIS!!!! */ console.log(i + "\n" + j)
-            if (positions[i][j].innerText === currentPlayerDice) {
-                cont++;
-            }
+    let row = positions.length - 1;
+    let column = 0;
+    for (let i = 0; i < positions.length; i++){
+        if (positions[row][column].innerText === currentPlayerDice) {
+            cont++;
         }
+        row--;
+        column++;
     }
     return cont;
 }
@@ -205,20 +216,23 @@ function firstPhase() {
 }
 //This function Creates a div's.
 function createTable() {
-    screen[0].innerHtml = "";
+    //resetTable();
+    screen = document.createElement("div");
+    screen.className = "array_table";
+
 
     /**
      * This div represents a number of rows in the table.
      * and receives a class name "table" to receive the estilization in the CSS.
-     */
-    for (let i = 0; i < positions.length; i++){
-        table[i] = document.createElement("div");
-        table[i].className = "table";
+    */
+   for (let i = 0; i < positions.length; i++){
+       table[i] = document.createElement("div");
+       table[i].className = "table";
 
 
-        /**
-         * This div represents the spaces that the dices will gonna be placed
-         * and receive the class name "array" to receive the estilization in the CSS.
+       /**
+        * This div represents the spaces that the dices will gonna be placed
+        * and receive the class name "array" to receive the estilization in the CSS.
          */
         for (let j = 0; j < positions[0].length; j++){
             positions[i][j] = document.createElement("div");
@@ -226,7 +240,7 @@ function createTable() {
             positions[i][j].id = i + "/" + j; //The id of the current div will receive it's position on the array
             table[i].appendChild(positions[i][j]);//The "array" div's will be appended in the  "table" div's 
         }
-        screen[0].appendChild(table[i]);//Therefore the "table" div's will be appended in the "container" div to be shown in the screen.
+        screen.appendChild(table[i]);//Therefore the "table" div's will be appended in the "container" div to be shown in the screen.
     }
-
+    container.appendChild(screen);
 }
