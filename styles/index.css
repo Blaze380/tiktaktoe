@@ -17,7 +17,7 @@ body{
     color: white;
 }
 
-.player_details{
+.player_bar{
     justify-content: space-around;
     display: flex;
     /**height: 50px;*/
