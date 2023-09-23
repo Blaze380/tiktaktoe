@@ -1,29 +1,73 @@
 *{
     margin: 0;
     padding: 0;
-}
-body{
-    background-color: #000000;
+    box-sizing: border-box;
 }
 :root{
     --table-color:#02083a;
     --border-color:#00c3ff5b;
-
+    --button-color:#BC13FE;
+    --button-border-color:#52c9db;
+}
+body{
+    background-color: #000000;
+}
+.main-menu .title{
+    display: flex;
+        justify-content: center;
+    margin-bottom:15%;
+}
+.main-menu p{
+    display: block;
+    color: white;
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+}
+.main-menu {
+    border-style: solid;
+    border-color: #c300ff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.main-menu .center button:hover{
+    color: #000000;
+    background-color: var(--button-border-color);
+    box-shadow: 0 0 12px var(--button-border-color);
+    border-color: transparent;
+}
+.main-menu .center button{
+    display: block;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 25px;
+    padding: 6px;
+    color:var(--button-color);
+    border-color:var(--button-border-color);
+    background-color: transparent;
+    transition: 300ms;
+}
+.main-menu .center{
+    padding: 20px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column; 
 }
 #player1,#player2{
     border-style: solid;
-    align-items:end;
     font-size: 60px;
     color: white;
 }
 
 .player_bar{
-    justify-content: space-around;
     display: flex;
     /**height: 50px;*/
 }
 
 .container{
+    /*REMOVE AFTER*/ display: none;
     box-shadow: 0 0 20px #ff00ea;
     border-color: #ff00ea;
     border-style: double;
@@ -33,6 +77,11 @@ body{
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+}
+.container .player_bar{
+    justify-content: space-around;
+    border-style: dashed;
+    border-color: #ff00ea;
 }
 .array_table{
      background-color: var(--table-color); 

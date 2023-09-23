@@ -19,13 +19,7 @@ class Player{
      player[i] = new Player("Joãozinh123");
 }
 const container = document.getElementById("container");
-const screen = document.getElementsByClassName("array_table");
-screen[0].addEventListener("click", function (event) {
-    //This condition was made to avoid to cause an exeption because of the table array doesn't have an ID!
-    if(event.target.id !==""){
-        addDice(event.target.id);
-    }
-});
+var arrayTable = null;
 var playerBar = null;
 var playerDetails = [];
 var positions = []; //This matrix is for the game table
@@ -48,13 +42,24 @@ for (let i = 0; i <= rows; i++){
     }
 }
 createTable();
+const btnStart = document.getElementById("btn-start");
+const btnScore = document.getElementById("btn-score");
+const btnSetting = document.getElementById("btn-setting");
+const btnAbous = document.getElementById("btn-about");
+container.addEventListener("click", function (event) {
+    //This condition was made to avoid to cause an exeption because of the table array doesn't have an ID!
+    if(event.target.id !==""){
+        addDice(event.target.id);
+    }
+});
 
 //This method removes the table and put a newer
 function resetTable() {
     for (let i = 0; i < positions.length; i++){
-        screen[0].removeChild(table[i]);
+        arrayTable.removeChild(table[i]);
         isOcuppied[i].fill(false);
     }
+    container.removeChild(playerBar);
     createTable();
 }
 
@@ -229,22 +234,25 @@ function firstPhase() {
 
 //This function Creates a div's.
 function createTable() {
-    // playerBar = document.createElement("div");
-    // playerBar.className = "player_bar";
-    // for (let i = 0; i < 3; i++){
-    //     playerDetails[i] = document.createElement("div");
-    //     playerDetails[i].id = "player" + (i + 1);
-    //     switch (i) {
-    //         case 0:
-    //             playerDetails[i].innerText = "X";
-    //             break;
-    //         case 1:
-    //             playerDetails[i].innerText = "O";
-    //             break;
-    //     }
-    //     playerBar.appendChild(playerDetails[i]);
-    // }
-    // container.appendChild(playerBar);
+    playerBar = document.createElement("div");
+    playerBar.className = "player_bar";
+    for (let i = 0; i <= 2; i++){
+        playerDetails[i] = document.createElement("div");
+        playerDetails[i].id = "player" + (i + 1);
+        switch (i) {
+            case 0:
+                playerDetails[i].innerText = "X";
+                break;
+            case 1:
+                playerDetails[i].innerText = "O";
+                break;
+        }
+        playerBar.appendChild(playerDetails[i]);
+    }
+    container.appendChild(playerBar);
+    arrayTable = document.createElement("div");
+    arrayTable.className = "array_table";
+    container.appendChild(arrayTable);
 
     /**
      * This div represents a number of rows in the table.
@@ -265,7 +273,7 @@ function createTable() {
             positions[i][j].id = i + "/" + j; //The id of the current div will receive it's position on the array
             table[i].appendChild(positions[i][j]);//The "array" div's will be appended in the  "table" div's 
         }
-        screen[0].appendChild(table[i]);//Therefore the "table" div's will be appended in the "container" div to be shown in the screen.
+        arrayTable.appendChild(table[i]);//Therefore the "table" div's will be appended in the "container" div to be shown in the screAen.
     }
 
 }
