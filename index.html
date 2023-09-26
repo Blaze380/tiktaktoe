@@ -7,7 +7,7 @@
 </head>
 <link rel="stylesheet" href="styles/index.css">
 <body>
-    <div class="main-menu">
+    <div class="main-menu" id="main-menu">
         <div class="center">
             <div class="title">
                 <p>TIC TAC TOE</p>
@@ -16,6 +16,27 @@
             <button id="btn-score">Scoreborard</button>
             <button id="btn-setting">Settings</button>
             <button id="btn-about">About</button>
+        </div>
+    </div>
+    <!-- Select Player -->
+    <div id="select-player">
+        <div class="center">
+            <div class="title">
+                <p>Select Game mode</p>
+            </div>
+            <button id="1-vs-1">1 VS 1</button>
+            <button id="1-vs-computer">1 VS Computer</button>
+        </div>
+    </div>
+    <!-- Player Name -->
+    <div id="insert-name">
+        <div class="center">
+            <div class="title">
+                <p>Your Name</p>
+            </div>
+            <input type="text" name="" id="player1-name" placeholder="Player1 name">
+            <input type="text" name="" id="player2-name" placeholder="Player2 name">
+            <button id="start-game">Start!</button>
         </div>
     </div>
     <div class="container" id="container"><!--Container-->

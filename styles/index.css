@@ -1,8 +1,14 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@keyframes fadeOutTransition {
+    0%{
+        opacity: 100%;
+    }
+    100%{
+        opacity: 0%;
+    }
 }
+
+
+*{margin: 0;padding: 0;box-sizing: border-box;}
 :root{
     --table-color:#02083a;
     --border-color:#00c3ff5b;
@@ -12,19 +18,25 @@
 body{
     background-color: #000000;
 }
-.main-menu .title{
+ .title{
     display: flex;
-        justify-content: center;
-    margin-bottom:15%;
+    justify-content: center;
+    margin-bottom:10%;
 }
-.main-menu p{
+p{
     display: block;
     color: white;
     font-size: 40px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-style: italic;
 }
-.main-menu {
+.animation{
+    animation-name: fadeOutTransition;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+#select-player{
+    /* REMOVE AFTER*/display: none;
     border-style: solid;
     border-color: #c300ff;
     position: absolute;
@@ -32,13 +44,32 @@ body{
     top: 50%;
     transform: translate(-50%,-50%);
 }
-.main-menu .center button:hover{
+#insert-name{
+    /* REMOVE AFTER*/display: none;
+    border-style: solid;
+    border-color: #c300ff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.main-menu {
+    border-style: solid;
+    border-color: #c300ff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    transition: 20s;
+}
+.center button:hover{
     color: #000000;
     background-color: var(--button-border-color);
     box-shadow: 0 0 12px var(--button-border-color);
     border-color: transparent;
 }
-.main-menu .center button{
+.center button{
     display: block;
     border-radius: 5px;
     margin: 5px;
@@ -49,12 +80,21 @@ body{
     background-color: transparent;
     transition: 300ms;
 }
-.main-menu .center{
+.center{
     padding: 20px;
     margin: 10px;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
 }
+.center input{
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 6px;
+    margin: 5px;
+    width: 200px;
+    height: 35px;
+}
+.center input:focus{outline: none;}
 #player1,#player2{
     border-style: solid;
     font-size: 60px;

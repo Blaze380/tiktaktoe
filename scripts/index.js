@@ -1,24 +1,66 @@
+//Player class
 class Player{
-    constructor(name){
-        this.name = name;
-        this.score = 0;
-        this.wins = 0;
-        this.loses = 0;
-        this.draws = 0;
-        this.gamesPlayed = 0;
+    constructor(){
+        this._name = "";
+        this._score = 0;
+        this._wins = 0;
+        this._loses = 0;
+        this._draws = 0;
+        this._gamesPlayed = 0;
     }
-     getName() {
-         return this.name;
-     }
-     setName(name) {
-         this.name = name;
-     }
- }
+    set name(name) {
+        this._name = name;
+    }
+    set score(score) {
+        this._score =score;
+    }
+    set wins(wins) {
+        this._wins =wins;
+    }
+    set loses(loses) {
+        this._loses =loses;
+    }
+    set draws(draws) {
+        this._draws =draws;
+    }
+    set gamesPlayed(gamesPlayed) {
+        this._gamesPlayed =gamesPlayed;
+    }
+    get name() {
+        return this._name;
+    }
+    get score() {
+        return this._score;
+    }
+    get wins() {
+        return this._wins;
+    }
+    get loses() {
+        return this._loses;
+    }
+    get draws() {
+        return this._draws;   
+    }
+    get gamesPlayed() {
+        return this._gamesPlayed 
+    }
+}
+ 
+ /**
+  * VARIABLES AND CONSTANTS:
+  */
  var player = [];
  for (let i = 0;i<2; i++){
-     player[i] = new Player("Joãozinh123");
-}
+     player[i] = new Player();
+    }
+const mainMenu = document.getElementById("main-menu");
+const insertName = document.getElementById("insert-name");
 const container = document.getElementById("container");
+const playerName1 = document.getElementById("player1-name");
+const playerName2 = document.getElementById("player2-name");
+const selectPlayer = document.getElementById("select-player");
+const body = document.body;
+var isPlayerVsPlayer = false;
 var arrayTable = null;
 var playerBar = null;
 var playerDetails = [];
@@ -42,16 +84,85 @@ for (let i = 0; i <= rows; i++){
     }
 }
 createTable();
-const btnStart = document.getElementById("btn-start");
-const btnScore = document.getElementById("btn-score");
-const btnSetting = document.getElementById("btn-setting");
-const btnAbous = document.getElementById("btn-about");
+
+
+
+/**
+ * EVENTS LISTENERS:
+ */
+mainMenu.addEventListener("click", function (e) {
+    switch (e.target.id) {
+        case "btn-start":
+            mainMenu.classList.add = "animation";
+            toggleMenu(mainMenu,"none");
+            toggleMenu(selectPlayer, "block");
+            break;
+        case "btn-score":
+            break;
+        case "btn-setting":
+            break;
+        case "btn-about":
+            break;
+    }
+});
+insertName.addEventListener("click", (event) => {
+    if (event.target.id === "start-game") {
+    addName();
+    toggleMenu(insertName, "none");
+    toggleMenu(container, "block");
+    }
+})
 container.addEventListener("click", function (event) {
     //This condition was made to avoid to cause an exeption because of the table array doesn't have an ID!
     if(event.target.id !==""){
         addDice(event.target.id);
     }
 });
+selectPlayer.addEventListener("click", function (event) {
+    switch (event.target.id) {
+        case "1-vs-1":
+            isPlayerVsPlayer = true;
+            toggleMenu(selectPlayer, "none");
+            toggleMenu(insertName, "block");
+            break;
+        case "1-vs-computer":
+            isPlayerVsPlayer = false;
+            toggleMenu(playerName2, "none");
+            toggleMenu(selectPlayer, "none");
+            toggleMenu(insertName, "block");
+            break;
+    }
+});
+
+/**
+ * This method receives an element to set the display,usually being 
+ * display block and none.
+ * @param {The object element} menu 
+ * @param {type of display} displayType 
+ */
+function toggleMenu(menu,displayType) {menu.style.display = displayType;}
+
+function addName() {
+    if (playerName1.value === "") {
+        player[0].name = "Player1";
+    } else {
+        player[0].name = playerName1.value;
+    }
+
+    /**
+     * Verifies if the current user will play versus player or computer
+     */
+    if (isPlayerVsPlayer) {
+        if (playerName2.value === "") {
+            player[1].name = "Player2";
+        } else {
+            player[1].name = playerName2.value;
+        }
+    }
+    console.log(player[0].name )
+    console.log(player[1].name )
+}
+
 
 //This method removes the table and put a newer
 function resetTable() {
