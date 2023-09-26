@@ -59,11 +59,10 @@ const container = document.getElementById("container");
 const playerName1 = document.getElementById("player1-name");
 const playerName2 = document.getElementById("player2-name");
 const selectPlayer = document.getElementById("select-player");
-const body = document.body;
+const arrayTable = document.getElementById("array_table");
+const playerBar = document.getElementById("player_bar");
 var isPlayerVsPlayer = false;
-var arrayTable = null;
-var playerBar = null;
-var playerDetails = [];
+const playerName = [document.getElementById("player1name"), document.getElementById("player2name")];
 var positions = []; //This matrix is for the game table
 var isOcuppied = []; //This matrix is do declare if the positions are ocuppied or not.
 var rows = 2; var columns = 2; ///I think that those are useless LOL
@@ -93,6 +92,8 @@ createTable();
 mainMenu.addEventListener("click", function (e) {
     switch (e.target.id) {
         case "btn-start":
+            console.log(playerName[0].id)
+            console.log(playerName[0].innerText);
             mainMenu.classList.add = "animation";
             toggleMenu(mainMenu,"none");
             toggleMenu(selectPlayer, "block");
@@ -143,12 +144,13 @@ selectPlayer.addEventListener("click", function (event) {
 function toggleMenu(menu,displayType) {menu.style.display = displayType;}
 
 function addName() {
+    console.log(playerName[0].innerText)
     if (playerName1.value === "") {
         player[0].name = "Player1";
     } else {
         player[0].name = playerName1.value;
     }
-
+    playerName[0].innerText = player[0].name;
     /**
      * Verifies if the current user will play versus player or computer
      */
@@ -158,9 +160,11 @@ function addName() {
         } else {
             player[1].name = playerName2.value;
         }
-    }
-    console.log(player[0].name )
-    console.log(player[1].name )
+        playerName[1].innerText = player[1].name;
+    } else {
+        player[1].name = "Computer";
+        playerName[1].innerText = player[1];
+        }
 }
 
 
@@ -170,7 +174,6 @@ function resetTable() {
         arrayTable.removeChild(table[i]);
         isOcuppied[i].fill(false);
     }
-    container.removeChild(playerBar);
     createTable();
 }
 
@@ -190,6 +193,19 @@ function addDice(arrayData) {
         isOcuppied[row][column] = true;
         won = verifyWinner();
         if (won) {
+            switch (currentPlayerDice) {
+                case "X":
+                    player[0].wins++;
+                    player[1].loses++;
+                    break;
+                case "O":
+                    player[1].wins++;
+                    player[0].loses++;
+                    break;
+            }
+            for (let i = 0; i < 2; i++){
+                player[i].gamesPlayed++;
+            }
             alert("I won!");
             resetTable();
         } else {
@@ -215,6 +231,11 @@ function verifyDraw() {
         }
     }
     if (cont === 9) {
+        for (let i = 0; i < 2; i++){
+                player[i].gamesPlayed++;
+            }
+        player[0].draws++;
+        player[1].draws++;
         alert("WithDraw");
     }
 }
@@ -345,25 +366,25 @@ function firstPhase() {
 
 //This function Creates a div's.
 function createTable() {
-    playerBar = document.createElement("div");
-    playerBar.className = "player_bar";
-    for (let i = 0; i <= 2; i++){
-        playerDetails[i] = document.createElement("div");
-        playerDetails[i].id = "player" + (i + 1);
-        switch (i) {
-            case 0:
-                playerDetails[i].innerText = "X";
-                break;
-            case 1:
-                playerDetails[i].innerText = "O";
-                break;
-        }
-        playerBar.appendChild(playerDetails[i]);
-    }
-    container.appendChild(playerBar);
-    arrayTable = document.createElement("div");
-    arrayTable.className = "array_table";
-    container.appendChild(arrayTable);
+    // playerBar = document.createElement("div");
+    // playerBar.className = "player_bar";
+    // for (let i = 0; i <= 2; i++){
+    //     playerName[i] = document.createElement("div");
+    //     playerName[i].id = "player" + (i + 1);
+    //     switch (i) {
+    //         case 0:
+    //             playerName[i].innerText = "X";
+    //             break;
+    //         case 1:
+    //             playerName[i].innerText = "O";
+    //             break;
+    //     }
+    //     playerBar.appendChild(playerName[i]);
+    // }
+    // container.appendChild(playerBar);
+    // arrayTable = document.createElement("div");
+    // arrayTable.className = "array_table";
+    // container.appendChild(arrayTable);
 
     /**
      * This div represents a number of rows in the table.

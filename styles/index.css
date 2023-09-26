@@ -23,6 +23,7 @@ body{
     justify-content: center;
     margin-bottom:10%;
 }
+
 p{
     display: block;
     color: white;
@@ -36,7 +37,7 @@ p{
     animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 #select-player{
-    /* REMOVE AFTER*/display: none;
+    display: none;
     border-style: solid;
     border-color: #c300ff;
     position: absolute;
@@ -45,7 +46,7 @@ p{
     transform: translate(-50%,-50%);
 }
 #insert-name{
-    /* REMOVE AFTER*/display: none;
+    display: none;
     border-style: solid;
     border-color: #c300ff;
     position: absolute;
@@ -105,9 +106,13 @@ p{
     display: flex;
     /**height: 50px;*/
 }
-
+span{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: white;
+}
 .container{
-    /*REMOVE AFTER*/ display: none;
+    /* REMOVE AFTER*/display: none;
     box-shadow: 0 0 20px #ff00ea;
     border-color: #ff00ea;
     border-style: double;
@@ -124,7 +129,7 @@ p{
     border-color: #ff00ea;
 }
 .array_table{
-     background-color: var(--table-color); 
+    background-color: var(--table-color); 
 }
 .table{
 display: flex;
