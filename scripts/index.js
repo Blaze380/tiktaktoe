@@ -163,7 +163,7 @@ function addName() {
         playerName[1].innerText = player[1].name;
     } else {
         player[1].name = "Computer";
-        playerName[1].innerText = player[1];
+        playerName[1].innerText = player[1].name;
         }
 }
 
