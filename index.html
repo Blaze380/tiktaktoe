@@ -7,7 +7,7 @@
 </head>
 <link rel="stylesheet" href="styles/index.css">
 <body>
-    <div class="main-menu" id="main-menu">
+    <div class="main-menu" id="main-menu" >
         <div class="center">
             <div class="title">
                 <p>TIC TAC TOE</p>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <!-- Select Player -->
-    <div id="select-player">
+    <div id="select-player" class="menu-display">
         <div class="center">
             <div class="title">
                 <p>Select Game mode</p>
@@ -29,7 +29,7 @@
         </div>
     </div>
     <!-- Player Name -->
-    <div id="insert-name">
+    <div id="insert-name" class="menu-display">
         <div class="center">
             <div class="title">
                 <p>Your Name</p>
@@ -39,16 +39,24 @@
             <button id="start-game">Start!</button>
         </div>
     </div>
-    <div id="scoreboard">
+    <div id="scoreboard" class="menu-display">
         <div class="center">
             <div class="title">
                 <p>SCOREBOARD KKK</p>
             </div>
-            <div id="score1">
-                <!-- name gamesplayed wins loses draws amanhãaaaaaaaaaaaaaaaaaaa -->
-            </div>
+            <hr>
+            <table id="score-table">
+                <tr id="score-list">
+                    <td>Name</td>
+                    <td>Games played</td>
+                    <td>Wins</td>
+                    <td>Loses</td>
+                    <td>Draws</td>
+                </tr>
+            </table>
         </div>
     </div>
+    <!-- name gamesplayed wins loses draws amanhãaaaaaaaaaaaaaaaaaaa -->
     <div class="container" id="container"><!--Container-->
 
 

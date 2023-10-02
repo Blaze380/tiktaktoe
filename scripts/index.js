@@ -54,6 +54,8 @@ class Player{
      player[i] = new Player();
     }
 const mainMenu = document.getElementById("main-menu");
+const scoreboard = document.getElementById("scoreboard");
+const scoreTable = document.getElementById("score-table");
 const insertName = document.getElementById("insert-name");
 const container = document.getElementById("container");
 const playerName1 = document.getElementById("player1-name");
@@ -61,6 +63,7 @@ const playerName2 = document.getElementById("player2-name");
 const selectPlayer = document.getElementById("select-player");
 const arrayTable = document.getElementById("array_table");
 const playerBar = document.getElementById("player_bar");
+var scoreList = [];
 var isPlayerVsPlayer = false;
 const playerName = [document.getElementById("player1name"), document.getElementById("player2name")];
 var positions = []; //This matrix is for the game table
@@ -99,6 +102,9 @@ mainMenu.addEventListener("click", function (e) {
             toggleMenu(selectPlayer, "block");
             break;
         case "btn-score":
+            addName();
+            toggleMenu(mainMenu,"none");
+            toggleMenu(scoreboard, "block");
             break;
         case "btn-setting":
             break;
@@ -135,6 +141,29 @@ selectPlayer.addEventListener("click", function (event) {
     }
 });
 
+function addScore() {
+    let hasScore = false;
+    let data = null;
+    for (let i = 0; i < 2; i++){
+        hasScore = false
+        scoreList[i] = document.createElement("tr");
+        data = document.createElement("td");
+        data.innerText = "player[i].name";
+        scoreList[i].appendChild(data); //The name
+        data.innerText = player[i].gamesPlayed;
+        scoreList[i].appendChild(data); //Games played
+        data.innerText = player[i].wins;
+        scoreList[i].appendChild(data);
+        data.innerText = player[i].loses;
+        scoreList[i].appendChild(data);
+        data.innerText = player[i].draws;
+        scoreList[i].appendChild(data);
+    }
+    
+}
+
+
+
 /**
  * This method receives an element to set the display,usually being 
  * display block and none.
@@ -163,7 +192,7 @@ function addName() {
         playerName[1].innerText = player[1].name;
     } else {
         player[1].name = "Computer";
-        playerName[1].innerText = player[1];
+        playerName[1].innerText = player[1].name;
         }
 }
 

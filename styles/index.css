@@ -31,22 +31,7 @@ p{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-style: italic;
 }
-.animation{
-    animation-name: fadeOutTransition;
-    animation-duration: 1s;
-    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-#select-player{
-    display: none;
-    border-style: solid;
-    border-color: #c300ff;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-}
-#insert-name{
-    display: none;
+.menu-display{
     border-style: solid;
     border-color: #c300ff;
     position: absolute;
@@ -54,7 +39,33 @@ p{
     top: 50%;
     transform: translate(-50%, -50%);
 }
+.animation{
+    animation-name: fadeOutTransition;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+#select-player{
+    display: none;
 
+}
+#insert-name input{
+    color: white;
+    background-color: transparent;
+    border-top: none;border-left: none;border-right: none;border-radius: 0;
+    transition: 300ms;
+}
+#insert-name input:focus{
+    border-color: var(--button-border-color);
+}
+#insert-name{
+    display: none;
+}
+#score-list td{
+
+}
+td{
+    color: white;
+}
 .main-menu {
     border-style: solid;
     border-color: #c300ff;
@@ -63,6 +74,11 @@ p{
     top: 50%;
     transform: translate(-50%,-50%);
     transition: 20s;
+}
+
+#scoreboard{
+    display: none;
+
 }
 .center button:hover{
     color: #000000;
